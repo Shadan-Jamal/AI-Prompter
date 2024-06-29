@@ -3,5 +3,13 @@
 @tailwind utilities;
 
 body{
-    background-color: #1a1a1a;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: radial-gradient(#434343, #000000);
+}
+
+p{
+    -webkit-text-stroke: 1px white;
 }
