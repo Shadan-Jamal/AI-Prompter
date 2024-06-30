@@ -1,21 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import Font, {Text} from 'react-font';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 function App() {
   const [inputValue,setInputValue] = useState('');
+  const [prompt, setPrompt] = useState('');
+  const [output, setOutput] = useState('');
+  const [loading, setLoading] = useState(false);
+  console.log(inputValue);
+  // const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+  // const model = genAI.getGenerativeModel({model : "gemini-1.5-flash"});
+
   
+  // useEffect(() => {
+
+  //   const fetchData = async () => {
+  //     prompt.length > 0 ? setLoading(true) : setLoading(false);
+  //     if(!loading && prompt.length > 0){
+  //       const result = await model.generateContent(prompt);
+  //       const response = await result.response;
+  //       setOutput(() => response.text());
+  //     }
+  //   }
+
+  //   fetchData();
+
+  // },[output,setOutput])
+
+
   return (
     <>
     <div className='grid place-content-center gap-9 h-screen'>
     <Font family='Bebas Neue'>
       <input
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
+      // value={inputValue}
+      // onChange={(e) => setInputValue(e.target.value)}
+      // onKeyDown={(e) => e.code === "Enter" && setPrompt(inputValue)}
       className='w-[900px] text-3xl text-white px-5 py-4 bg-transparent border border-white rounded-full' 
       type="text" />
       </Font>
       <Text className='bg-transparent tracking-widest max-w-[900px] max-h-[400px] overflow-y-scroll text-wrap p-5 rounded-lg'>
-        
+        {output}
       </Text>
       </div>
     </>
