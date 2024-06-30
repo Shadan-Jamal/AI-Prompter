@@ -7,35 +7,37 @@ function App() {
   const [prompt, setPrompt] = useState('');
   const [output, setOutput] = useState('');
   const [loading, setLoading] = useState(false);
-  console.log(inputValue);
-  // const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-  // const model = genAI.getGenerativeModel({model : "gemini-1.5-flash"});
+
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
+  const model = genAI.getGenerativeModel({model : "gemini-1.5-flash"});
 
   
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const fetchData = async () => {
-  //     prompt.length > 0 ? setLoading(true) : setLoading(false);
-  //     if(!loading && prompt.length > 0){
-  //       const result = await model.generateContent(prompt);
-  //       const response = await result.response;
-  //       setOutput(() => response.text());
-  //     }
-  //   }
+    const fetchData = async () => {
+      prompt.length > 0 ? setLoading(true) : setLoading(false);
 
-  //   fetchData();
+      if(!loading && prompt.length > 0 && inputValue.length > 0){
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        setOutput(() => response.text());
+      }
+    }
 
-  // },[output,setOutput])
+    fetchData();
+
+  },[setOutput,prompt,inputValue])
 
 
   return (
     <>
     <div className='grid place-content-center gap-9 h-screen'>
     <Font family='Bebas Neue'>
+      <h1 className='text-4xl font-bold text-start tracking-wider text-white p-5'>Enter a prompt. </h1>
       <input
-      // value={inputValue}
-      // onChange={(e) => setInputValue(e.target.value)}
-      // onKeyDown={(e) => e.code === "Enter" && setPrompt(inputValue)}
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+      onKeyDown={(e) => e.code === "Enter" && setPrompt(inputValue)}
       className='w-[900px] text-3xl text-white px-5 py-4 bg-transparent border border-white rounded-full' 
       type="text" />
       </Font>
