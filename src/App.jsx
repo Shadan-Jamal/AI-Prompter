@@ -45,7 +45,7 @@ function App() {
   return (
     <>
     <Navbar />
-    <div className='w-[90vw] leading-7 h-screen p-10'>
+    <div className='w-full leading-7 pt-4 px-4'>
     <Font family='Dosis' weight={700}>
       <h1 className='text-4xl font-bold text-start tracking-widest text-white p-5'>Enter A Prompt. </h1>
       <div className='mb-3'>
@@ -57,9 +57,10 @@ function App() {
         type="text" />
       </div>
       </Font>
+
       {loading ?
       <Text family='Dosis' className='bg-transparent tracking-[2.4px]text-[15px] px-4 py-2 font-light'> Loading...</Text>
-      : <Text family='Dosis' className='bg-transparent tracking-[2.4px] text-wrap p-5 rounded-lg text-[15px] whitespace-pre-wrap px-4 py-2 border-l-2 border-l-slate-300 overflow-scroll font-light'>
+      : output && <Text family='Dosis' className='bg-transparent tracking-[2.4px] max-w-[100vw] max-h-[550px] text-wrap p-5 rounded-lg text-[15px] whitespace-pre-wrap px-4 py-2 border-l-2 border-l-slate-300 overflow-auto font-light'>
       {output}
       </Text>
       }
