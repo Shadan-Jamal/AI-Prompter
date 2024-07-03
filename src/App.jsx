@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import Font, {Text} from 'react-font';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import Navbar from "./components/Navbar";
 
 function App() {
   const [inputValue,setInputValue] = useState('');
@@ -11,37 +12,48 @@ function App() {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({model : "gemini-1.5-flash"});
 
-  
+  const handleKeyDown = (e) => {
+    if (e.code === "Enter") {
+      setPrompt(() => inputValue)
+    }
+  }
+
   useEffect(() => {
 
     const fetchData = async () => {
-      prompt.length > 0 ? setLoading(true) : setLoading(false);
+      // prompt.length > 0 ? setLoading(true) : setLoading(false);
+      console.log(prompt);
 
-      if(!loading && prompt.length > 0 && inputValue.length > 0){
+      if(prompt.length > 0 && inputValue.length > 0){
         const result = await model.generateContent(prompt);
         const response = await result.response;
-        setOutput(() => response.text());
+        // console.log(response.text());
+        setOutput(() => {
+          const text = response.text();
+          return text.split('')
+        });
       }
     }
-
+    console.log(output);
     fetchData();
 
-  },[setOutput,prompt,inputValue])
+  },[prompt,setPrompt])
 
 
   return (
     <>
-    <div className='grid place-content-center gap-9 h-screen'>
-    <Font family='Bebas Neue'>
-      <h1 className='text-4xl font-bold text-start tracking-wider text-white p-5'>Enter a prompt. </h1>
+    <Navbar />
+    <div className='w-[70vw] leading-7 h-screen p-10'>
+    <Font family='Dosis' weight={700}>
+      <h1 className='text-4xl font-bold text-start tracking-widest text-white p-5 .playwrite-es-deco-textfont'>Enter A Prompt. </h1>
       <input
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
-      onKeyDown={(e) => e.code === "Enter" && setPrompt(inputValue)}
-      className='w-[900px] text-3xl text-white px-5 py-4 bg-transparent border border-white rounded-full' 
+      onKeyDown={(e) => handleKeyDown(e)}
+      className='w-3/4 text-[20px] text-white px-3 py-3 bg-transparent border border-white rounded-full' 
       type="text" />
       </Font>
-      <Text className='bg-transparent tracking-widest max-w-[900px] max-h-[400px] overflow-y-scroll text-wrap p-5 rounded-lg'>
+      <Text family='Dosis' className='bg-transparent tracking-[2.4px] max-w-full max-h-[200px] text-wrap p-5 rounded-lg text-[15px]'>
         {output}
       </Text>
       </div>

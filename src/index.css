@@ -1,15 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+ES+Deco:wght@288&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 body{
-    width: 100vw;
-    height: 100vh;
     background: #000000;
-    background: -webkit-linear-gradient(to right, #434343, #000000);
-    background: radial-gradient(#434343, #000000);
 }
 
 p{
     -webkit-text-stroke: 1px white;
 }
+
+.playwrite-es-deco-textfont {
+    font-family: "Playwrite ES Deco", cursive;
+    font-optical-sizing: auto;
+    font-weight: 288;
+    font-style: normal;
+  }
