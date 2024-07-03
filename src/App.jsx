@@ -45,7 +45,7 @@ function App() {
     <Navbar />
     <div className='w-[70vw] leading-7 h-screen p-10'>
     <Font family='Dosis' weight={700}>
-      <h1 className='text-4xl font-bold text-start tracking-widest text-white p-5 .playwrite-es-deco-textfont'>Enter A Prompt. </h1>
+      <h1 className='text-4xl font-bold text-start tracking-widest text-white p-5'>Enter A Prompt. </h1>
       <input
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
