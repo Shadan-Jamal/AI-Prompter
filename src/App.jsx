@@ -7,20 +7,19 @@ import CardTwo from "./components/CardTwo";
 import SinglePrompts from './components/SinglePrompts';
 
 function App() {
-  const [mousePosition,setMousePosition] = useState({ x:0 , y:0});
 
   useEffect(() => {
     window.addEventListener("mousemove", (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      document.getElementById('mouse-move').style.transform=`translate(${e.clientX}px,${e.clientY}px)`
     })
-  },[mousePosition])
+  },[])
 
   return (
     <>
     <Navbar />
     
-    <div 
-    style={{transform: `translate(${mousePosition.x}px,${mousePosition.y}px)`}}
+    <div
+    id='mouse-move'
     className='absolute -z-50 w-20 h-20 rounded-full bg-white'>
     </div>
 
