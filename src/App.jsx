@@ -1,69 +1,39 @@
-import React, { useState , useEffect} from 'react';
-import Font, {Text} from 'react-font';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import React from 'react';
 import Navbar from "./components/Navbar";
+import Font,{Text} from 'react-font';
+import { motion } from 'framer-motion';
+import SinglePrompts from './components/SinglePrompts';
+
 
 function App() {
-  const [inputValue,setInputValue] = useState('');
-  const [prompt, setPrompt] = useState('');
-  const [output, setOutput] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-  const model = genAI.getGenerativeModel({model : "gemini-1.5-flash"});
-
-  const handleKeyDown = (e) => {
-    if (e.code === "Enter") {
-      setLoading(true);
-      setPrompt(() => inputValue)
-    }
-  }
-
-  useEffect(() => {
-
-    // console.log(`before fetch ${loading}`);
-    // setLoading(true);
-    const fetchData = async () => {
-      // console.log(`after fetch ${loading}`)
-      if(prompt.length > 0 && inputValue.length > 0){
-        // console.log(`inside if ${loading}`)
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        setOutput(() => {
-          const text = response.text();
-          setLoading(false);
-          console.log(text,loading);
-          return text;
-        });
-      }
-    }
-    fetchData();
-
-  },[prompt,setPrompt,loading])
-
-
   return (
     <>
     <Navbar />
-    <div className='w-full leading-7 pt-4 px-4'>
-    <Font family='Dosis' weight={700}>
-      <h1 className='text-4xl font-bold text-start tracking-widest text-white p-5'>Enter A Prompt. </h1>
-      <div className='mb-3'>
-        <input
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => handleKeyDown(e)}
-        className='w-3/4 text-[20px] text-white px-3 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
-        type="text" />
+    <div className='grid grid-cols-2 grid-flow-row place-content-center place-items-center gap-10 w-full h-screen px-10'>
+      <div className='col-span-1 w-[400px] h-[250px] px-7 py-5 bg-zinc-300/10 rounded-3xl'>
+        <div className='text-white w-full mb-6'>
+          <Font family='Prata' weight={400}>
+            <h3 className='text-3xl mb-3'>Single Prompts</h3>
+          </Font>
+          <div className='w-full h-[1px] bg-white/95'></div>
+        </div>
+        <div className='w-full'>
+        <Font family='Prata' weight={400}>
+            <h3 className='text-white text-wrap '>Use this bot to engange in isolated prompts along with instructions to specify the bot's behaviour.
+            </h3>
+        </Font>
+        </div>
       </div>
-      </Font>
+      <div className='col-span-1 bg-red-500 w-[400px] h-[250px]'>
 
-      {loading ?
-      <Text family='Dosis' className='bg-transparent tracking-[2.4px]text-[15px] px-4 py-2 font-light'> Loading...</Text>
-      : output && <Text family='Dosis' className='bg-transparent tracking-[2.4px] max-w-[100vw] max-h-[550px] text-wrap p-5 rounded-lg text-[15px] whitespace-pre-wrap px-4 py-2 border-l-2 border-l-slate-300 overflow-auto font-light'>
-      {output}
-      </Text>
-      }
+      </div>
+      <div className='col-span-2 w-3/4 h-[50px] hover:cursor-default'>
+        <Font family='DM Serif Display' weight={800}>
+          <motion.p 
+          className='text-7xl tracking-tight capitalize text-center'>Choose an option</motion.p>
+        </Font>
+      </div>
+    {/* <SinglePrompts /> */}
     </div>
     </>
   )
