@@ -5,7 +5,12 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 
 function CardOne() {
   return (
-    <div className='col-span-1 w-[400px] h-[250px] px-7 py-5 bg-zinc-300/10 rounded-3xl'>
+    <motion.div
+    initial={{border:"none"}}
+    whileHover={{border:"3px solid white"}}
+    transition={{
+      ease:"ease-in-out"}}
+    className='col-span-1 w-[400px] h-[250px] px-7 py-5 bg-zinc-200/10 rounded-3xl hover:cursor-none'>
         <div className='text-white w-full mb-6'>
           <Font family='Prata' weight={400}>
             <h3 className='text-3xl mb-3'>Single Prompts</h3>
@@ -30,7 +35,7 @@ function CardOne() {
             </Font>
           </motion.button> */}
         </div>
-      </div>
+      </motion.div>
   )
 }
 
