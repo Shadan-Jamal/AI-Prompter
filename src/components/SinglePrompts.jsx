@@ -14,7 +14,10 @@ function SinglePrompts({cursorSize,setCursorSize}) {
   const [loading, setLoading] = useState(false);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-  const model = genAI.getGenerativeModel({model : "gemini-1.5-flash" , systemInstruction : instruction});
+  const model = genAI.getGenerativeModel({
+    model : "gemini-1.5-flash",
+    temperatute : 1.9, 
+    systemInstruction : instruction});
 
   const handleKeyDown = () => {
     console.log(inputValue);

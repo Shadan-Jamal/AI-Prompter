@@ -5,13 +5,14 @@ import Navbar from "./components/Navbar";
 import CardOne from './components/CardOne';
 import CardTwo from "./components/CardTwo";
 import SinglePrompts from './components/SinglePrompts';
+// import StreamPrompt from './components/StreamPrompt';
 import Cursor from './components/Cursor';
 
 function App() {
   const [cursorSize,setCursorSize] = useState({w : 'w-5', h : 'h-5'});
   const [showCard,setShowCard] = useState({cardOne : false , cardTwo : false});
 
-
+  console.log(showCard);
   return (
     <>
     <Navbar />
@@ -19,7 +20,7 @@ function App() {
     <div className='grid grid-cols-2 grid-flow-row place-content-center place-items-center gap-10 w-full h-screen px-10'>
 
       <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard}/>  
-      <CardTwo setCursorSize={setCursorSize} />
+      <CardTwo setCursorSize={setCursorSize} setShowCard={setShowCard}/>
 
       <motion.div
       onMouseEnter={() => setCursorSize({w : 'w-24' , h : 'h-24'})}
@@ -35,6 +36,7 @@ function App() {
       <div className='border border-zinc-600 col-span-2 w-full mt-5'></div>
     </div>
       {showCard.cardOne && <SinglePrompts cursorSize={cursorSize} setCursorSize={setCursorSize}/>}
+      {/* {showCard.cardTwo && <StreamPrompt />} */}
     </>
   )
 }

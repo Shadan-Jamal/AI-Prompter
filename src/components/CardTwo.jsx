@@ -3,7 +3,7 @@ import Font from "react-font";
 import { motion } from 'framer-motion';
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
-function CardTwo({setCursorSize}) {
+function CardTwo({setCursorSize,setShowCard}) {
   return (
     <motion.div 
     onMouseEnter={() => setCursorSize({w : "w-12", h : "h-12"})}
