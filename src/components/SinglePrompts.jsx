@@ -2,11 +2,12 @@ import React,{useState, useEffect} from 'react';
 import Font,{Text} from 'react-font';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { motion } from 'framer-motion';
-import { HiMagnifyingGlass } from "react-icons/hi2";
+import { BsArrowRight } from "react-icons/bs";
+import Cursor from './Cursor';
 
-function SinglePrompts() {
+function SinglePrompts({cursorSize,setCursorSize}) {
 
-    const [inputValue,setInputValue] = useState({input_one : "",input_two : ""});
+  const [inputValue,setInputValue] = useState({input_one : "",input_two : ""});
   const [prompt, setPrompt] = useState('');
   const [output, setOutput] = useState('');
   const [instruction,addInstruction] = useState('');
@@ -43,7 +44,11 @@ function SinglePrompts() {
   console.log(inputValue);
 
   return (
-    <div className='w-full bg-black h-full leading-7 pt-10 px-4'>
+    <>
+    {/* <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/> */}
+    <motion.div
+    onMouseEnter={() => setCursorSize({ w:"w-16", h:"h-16"})}
+    className='w-full h-screen leading-7 pt-10 px-4'>
     <Font family='Dosis' weight={700}>
     <div className='grid grid-cols-2 place-content-center gap-9'>
         <div className='col-span-2 mb-4 flex flex-row justify-center items-center gap-1'>
@@ -55,7 +60,7 @@ function SinglePrompts() {
             id='prompt'
             value={inputValue.input_one}
             onChange={(e) => setInputValue((prevInput) => {
-                return {...prevInput, input_one : e.target.value}
+              return {...prevInput, input_one : e.target.value}
             })}
             // onKeyDown={(e) => handleKeyDown(e)}
             className='w-[80%] text-[20px] text-white px-3 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
@@ -84,7 +89,7 @@ function SinglePrompts() {
           initial={{}} 
             onClick={handleKeyDown}
           className="absolute right-[53vw]">
-            <HiMagnifyingGlass color='white' size={"40px"}/>
+            <BsArrowRight color='white' size={"40px"}/>
           </motion.button>
         </motion.div>
     </div>
@@ -96,7 +101,8 @@ function SinglePrompts() {
       {output}
       </Text>
       }
-    </div>
+    </motion.div>
+      </>
   )
 }
 

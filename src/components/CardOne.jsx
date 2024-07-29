@@ -3,9 +3,11 @@ import Font from "react-font";
 import { motion } from 'framer-motion';
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
-function CardOne() {
+function CardOne({setCursorSize,setShowCard}) {
   return (
     <motion.div
+    onMouseEnter={() => setCursorSize({w : "w-12", h : "h-12"})}
+    onMouseLeave={() => setCursorSize({w : "w-5", h : "h-5"})}
     initial={{border:"none"}}
     whileHover={{border:"3px solid white"}}
     transition={{
@@ -26,8 +28,12 @@ function CardOne() {
         <div className='w-full h-[0.2px] bg-white/95'></div>
         <div className='w-full py-6 px-3'>
           <motion.button
+          onClick={() => setShowCard((prev) => {
+            return {...prev,cardOne:true}
+          })} 
           className='text-white text-xl' 
-          > <BsBoxArrowUpRight />
+          >
+              <BsBoxArrowUpRight />
           </motion.button>
           {/* <motion.button className="text-white text-xl">
             <Font family='Prata' weight={400}>
