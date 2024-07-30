@@ -7,6 +7,7 @@ import CardTwo from "./components/CardTwo";
 import SinglePrompts from './components/SinglePrompts';
 // import StreamPrompt from './components/StreamPrompt';
 import Cursor from './components/Cursor';
+import ChatPrompt from './components/ChatPrompt';
 
 function App() {
   const [cursorSize,setCursorSize] = useState({w : 'w-5', h : 'h-5'});
@@ -33,10 +34,13 @@ function App() {
           </motion.p>
         </Font>
       </motion.div>
-      <div className='border border-zinc-600 col-span-2 w-full mt-5'></div>
+      <div className='border border-zinc-600 col-span-2 w-full mt-8'></div>
     </div>
-      {showCard.cardOne && <SinglePrompts cursorSize={cursorSize} setCursorSize={setCursorSize}/>}
+    <div>
+      {/* {showCard.cardOne && <SinglePrompts cursorSize={cursorSize} setCursorSize={setCursorSize}/>} */}
+      {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard}/>}
       {/* {showCard.cardTwo && <StreamPrompt />} */}
+    </div>
     </>
   )
 }
