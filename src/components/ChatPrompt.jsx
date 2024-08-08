@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Font,{Text} from 'react-font';
 import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { motion } from 'framer-motion'
@@ -39,7 +40,7 @@ function ChatPrompt({ setShowCard }) {
 
   return (
     <>
-      <div className="w-screen h-screen bg-zinc-800 p-24 relative">
+      <div className="w-screen h-screen bg-zinc-800 px-24 py-10 relative cursor-default">
         <motion.div
           className='absolute top-5 left-5 rounded-full p-3 hover:bg-zinc-700'>
           <RxCross1
@@ -61,7 +62,9 @@ function ChatPrompt({ setShowCard }) {
             type="text" />
         </motion.div>
         <motion.div className='w-full p-8'>
-          <p className='text-red-500'>{result}</p>
+          <Text family='Exo' weight={500}
+           className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap border-l-2 border-l-slate-300 shadow-slate-600 shadow-sm px-4 py-3 rounded-xl overflow-auto'>{result}
+          </Text>
         </motion.div>
       </div>
     </>
