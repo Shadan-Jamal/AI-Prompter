@@ -8,11 +8,9 @@ function CardOne({setCursorSize,setShowCard}) {
     <motion.div
     onMouseEnter={() => setCursorSize({w : "w-12", h : "h-12"})}
     onMouseLeave={() => setCursorSize({w : "w-5", h : "h-5"})}
-    initial={{border:"none"}}
-    whileHover={{border:"3px solid white"}}
     transition={{
-      ease:"ease-in-out"}}
-    className='col-span-1 w-[400px] h-[250px] px-7 py-5 bg-zinc-200/10 rounded-3xl hover:cursor-none'>
+    ease: 'easeInOut'}}
+    className='px-7 py-5 bg-zinc-200/10 rounded-3xl hover:cursor-none'>
         <div className='text-white w-full mb-6'>
           <Font family='Prata' weight={400}>
             <h3 className='text-3xl mb-3'>Single Prompts</h3>

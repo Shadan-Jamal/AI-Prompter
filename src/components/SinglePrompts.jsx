@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import Font,{Text} from 'react-font';
+import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { motion } from 'framer-motion';
 import { BsArrowRight } from "react-icons/bs";
 import Cursor from './Cursor';
 
-function SinglePrompts({cursorSize,setCursorSize}) {
+function SinglePrompts({setCursorSize , setShowCard}) {
 
   const [inputValue,setInputValue] = useState({input_one : "",input_two : ""});
   const [prompt, setPrompt] = useState('');
@@ -49,9 +50,23 @@ function SinglePrompts({cursorSize,setCursorSize}) {
   return (
     <>
     {/* <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/> */}
+    
     <motion.div
     onMouseEnter={() => setCursorSize({ w:"w-16", h:"h-16"})}
-    className='w-full h-screen leading-7 pt-10 px-4'>
+    className='w-full h-screen relative leading-7 pt-24 px-8'>
+
+      <motion.div
+          className='absolute top-5 left-5 rounded-full p-3 hover:bg-zinc-700'>
+          <RxCross1
+            onClick={() => {
+              setShowCard((prev) => {
+                return { ...prev, cardOne: false }
+              })
+            }}
+            size={"22px"}
+            className='text-white text-3xl' />
+        </motion.div>
+
     <Font family='Dosis' weight={700}>
     <div className='grid grid-cols-2 place-content-center gap-9'>
         <div className='col-span-2 mb-4 flex flex-row justify-center items-center gap-1'>
