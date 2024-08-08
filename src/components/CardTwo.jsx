@@ -5,10 +5,13 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 
 function CardTwo({setCursorSize,setShowCard}) {
   return (
-    <motion.div 
+    <motion.div
+    initial={{x : -500}}
+    animate={{x : 0}}
+    transition={{delay :0.1 , type : 'spring' , ease : 'linear'}} 
     onMouseEnter={() => setCursorSize({w : "w-12", h : "h-12"})}
     onMouseLeave={() => setCursorSize({w : "w-5", h : "h-5"})}
-    className='col-span-1 w-[400px] h-[250px] px-7 pt-7 bg-zinc-300/10 rounded-3xl flex flex-col justify-evenly items-center hover:cursor-none'>
+    className='w-full h-full px-7 pt-7 bg-zinc-300/10 rounded-3xl flex flex-col justify-evenly items-center hover:cursor-none'>
         <div className='text-white w-full mb-6'>
           <Font family='Prata' weight={400}>
             <h3 className='text-3xl mb-3'>Chat Bot</h3>

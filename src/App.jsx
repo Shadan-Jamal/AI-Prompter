@@ -30,7 +30,7 @@ function App() {
       initial = {{scale : 0}}
       animate={{scale : 1}}
       exit={{scale : 0}}
-      transition={{delay : 0.2, ease: 'easeInOut' , type: spring}}
+      transition={{delay : 0.1, ease: 'easeInOut' , type: spring}}
       className='rounded-full p-5 col-span-2 transition-colors'
       onHoverStart={() => changeColor('black')}
       onHoverEnd={() => changeColor('white')}
@@ -44,17 +44,17 @@ function App() {
       </motion.div>
       </AnimatePresence>}
 
-      {cardsAppear && 
-      <motion.div
-      initial={{x : 100}}
-      animate={{x : 0}}
-      transition={{delay :0.4 , type : spring , ease : 'easeInOut'}}
+      
+    {cardsAppear && <motion.div
+    className='col-span-1 w-[500px] h-[300px] overflow-hidden'
+
+    >
+      <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard}/>  
+    </motion.div>}
+
+      {cardsAppear && <motion.div
       className='col-span-1 w-[500px] h-[300px] overflow-hidden'
       >
-        <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard}/>  
-      </motion.div>}
-
-      {cardsAppear && <motion.div>
         <CardTwo setCursorSize={setCursorSize} setShowCard={setShowCard}/>
       </motion.div>}
 
