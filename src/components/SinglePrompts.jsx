@@ -89,7 +89,7 @@ function SinglePrompts({setCursorSize , setShowCard}) {
             <label 
             htmlFor="instruction"
             className='text-4xl font-bold text-start tracking-widest text-white px-2'
-            >Enter an Instruction for the prompt.</label>
+            >Enter an Instruction for me..</label>
             <input
             id='instruction'
             value={inputValue.input_two}

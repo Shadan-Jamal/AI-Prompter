@@ -69,12 +69,13 @@ function App() {
           </motion.p>
         </Font>
       </motion.div>}
-      <div className='border border-zinc-600 col-span-2 w-full mt-8'></div>
+      {cardsAppear && <div className='border border-zinc-600 col-span-2 w-full mt-8'></div>}
     </div>
     <div>
       {showCard.cardOne && <SinglePrompts setShowCard={setShowCard}/>}
-      {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard}/>}
+      {/* {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard}/>} */}
       {/* {showCard.cardTwo && <StreamPrompt />} */}
+      <ChatPrompt setShowCard={setShowCard}/>
     </div>
     </>
   )

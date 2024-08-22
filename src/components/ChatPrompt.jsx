@@ -8,10 +8,11 @@ function ChatPrompt({ setShowCard }) {
   const [input, setInput] = useState('')
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
-  const [chatHistory, setChatHistory] = useState([{
+  const [genChatHistory, setGenChatHistory] = useState([{
     role: "user",
     parts: [{ text: "Hello." }],
   }]);
+  const [viewChat,setViewChat] = useState([{question : '' , answer : ''}]);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -19,27 +20,39 @@ function ChatPrompt({ setShowCard }) {
   const handleSubmit = (e) => {
     if (e.code === "Enter") {
       setPrompt(input);
-      setChatHistory((prev) => {
+      setGenChatHistory((prev) => {
         return [...prev, {
           role: prev[prev.length - 1].role === "user" ? "model" : "user",
-          parts: [{ text: prev[prev.length - 1].role === "user" ? result : prompt }],
+          parts: [{ text: prev[prev.length - 1].role === "user" ? result : prompt}],
         }];
       })
-      console.log(chatHistory);
+      // console.log(genChatHistory);
     }
   }
 
   useEffect(() => {
     const generate = async () => {
-      const chat = model.startChat({ history: chatHistory });
+      const chat = model.startChat({ history: genChatHistory });
       const question = await chat.sendMessage(prompt);
-      setResult(() => question.response.text());
+      const result = question.response.text();
+      setResult(() => result);
+      console.log("running after setResult");
+      // console.log(genChatHistory)
     }
     generate();
   }, [prompt])
+  
+  useEffect(() => {
+    setViewChat((prevChat) => {
+      return [...prevChat, {question : prompt, answer : result}]
+    });
+    console.log("Second useEffect running");
+    console.log(viewChat);
+  },[result])
 
   return (
     <>
+    <Font family='Exo' weight={500}>
       <div className="w-screen h-screen bg-zinc-800 px-24 py-10 relative cursor-default">
         <motion.div
           className='absolute top-5 left-5 rounded-full p-3 hover:bg-zinc-700'>
@@ -53,20 +66,22 @@ function ChatPrompt({ setShowCard }) {
             className='text-white text-3xl' />
         </motion.div>
 
-        <motion.div className="w-full bg-zinc-600 p-6">
-          <h2 className='text-white'>Enter a prompt</h2>
+        <motion.div className="w-full bg-zinc-600/20 p-3 rounded-lg">
           <input
+          placeholder='Ask away...'
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleSubmit}
+            className='bg-transparent w-full text-white hover:outline-none'
             type="text" />
         </motion.div>
         <motion.div className='w-full p-8'>
-          <Text family='Exo' weight={500}
-           className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap border-l-2 border-l-slate-300 shadow-slate-600 shadow-sm px-4 py-3 rounded-xl overflow-auto'>{result}
-          </Text>
+            <h1
+           className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
+            >{result}</h1>
         </motion.div>
       </div>
+    </Font>
     </>
   )
 }
