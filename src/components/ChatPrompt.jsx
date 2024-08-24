@@ -12,7 +12,7 @@ function ChatPrompt({ setShowCard }) {
     role: "user",
     parts: [{ text: "Hello." }],
   }]);
-  const [viewChat,setViewChat] = useState([{question : '' , answer : ''}]);
+  const [viewChat,setViewChat] = useState([{}]);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -20,35 +20,41 @@ function ChatPrompt({ setShowCard }) {
   const handleSubmit = (e) => {
     if (e.code === "Enter") {
       setPrompt(input);
-      setGenChatHistory((prev) => {
-        return [...prev, {
-          role: prev[prev.length - 1].role === "user" ? "model" : "user",
-          parts: [{ text: prev[prev.length - 1].role === "user" ? result : prompt}],
-        }];
-      })
+      setInput('');
       // console.log(genChatHistory);
     }
   }
 
   useEffect(() => {
     const generate = async () => {
-      const chat = model.startChat({ history: genChatHistory });
-      const question = await chat.sendMessage(prompt);
-      const result = question.response.text();
-      setResult(() => result);
-      console.log("running after setResult");
-      // console.log(genChatHistory)
+      if(prompt){
+        const chat = model.startChat({ history: genChatHistory });
+        const question = await chat.sendMessage(prompt);
+        const response = await question.response.text();
+        setResult(() => response);
+
+        setGenChatHistory((prev) => {
+          return [...prev, {
+            role: prev[prev.length - 1].role === "user" ? "model" : "user",
+            parts: [{ text: prev[prev.length - 1].role === "user" ? result : prompt}],
+          }];
+        });
+
+        setViewChat((prevChat) => {
+          return [...prevChat, {question : prompt, answer : response}]
+        });
+
+        console.log("running after setResult");
+        console.log(viewChat);
+
+        // console.log(genChatHistory)
+      }
     }
-    generate();
+
+    if(prompt){
+      generate();
+    }
   }, [prompt])
-  
-  useEffect(() => {
-    setViewChat((prevChat) => {
-      return [...prevChat, {question : prompt, answer : result}]
-    });
-    console.log("Second useEffect running");
-    console.log(viewChat);
-  },[result])
 
   return (
     <>
@@ -76,9 +82,18 @@ function ChatPrompt({ setShowCard }) {
             type="text" />
         </motion.div>
         <motion.div className='w-full p-8'>
-            <h1
-           className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
-            >{result}</h1>
+            {genChatHistory && viewChat.map((chat,index) => {
+              return <div
+              key={index}
+              > 
+                <h1
+                className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 mb-5 rounded-xl overflow-auto'
+                >{`${chat.question}`}</h1>
+                <h1
+                className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 mb-5 rounded-xl overflow-auto'
+                >{`${chat.answer}`}</h1>
+             </div>
+            })}
         </motion.div>
       </div>
     </Font>
