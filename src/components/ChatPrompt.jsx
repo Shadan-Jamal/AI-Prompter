@@ -82,7 +82,7 @@ function ChatPrompt({ setShowCard }) {
             type="text" />
         </motion.div>
         <motion.div className='w-full p-8'>
-            {genChatHistory && viewChat.map((chat,index) => {
+            {viewChat.map((chat,index) => {
               return <div
               key={index}
               > 
