@@ -11,7 +11,7 @@ function CardOne({setCursorSize,setShowCard}) {
     transition={{delay :0.1 , type : 'spring' , ease : 'linear'}}
     onMouseEnter={() => setCursorSize({w : "w-12", h : "h-12"})}
     onMouseLeave={() => setCursorSize({w : "w-5", h : "h-5"})}
-    className='w-full h-full px-7 py-5 bg-zinc-200/10 rounded-3xl hover:cursor-none flex flex-col justify-evenly'>
+    className='w-[90%] h-full px-7 py-5 bg-zinc-200/10 rounded-3xl hover:cursor-none flex flex-col justify-evenly'>
         <div className='text-white w-full'>
           <Font family='Prata' weight={400}>
             <h3 className='text-3xl mb-3'>Single Prompts</h3>

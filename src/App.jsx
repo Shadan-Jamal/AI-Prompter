@@ -46,14 +46,14 @@ function App() {
 
       
     {cardsAppear && <motion.div
-    className='col-span-1 w-[500px] h-[300px] overflow-hidden'
+    className='col-span-1 w-[600px] h-[300px] overflow-hidden'
 
     >
       <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard}/>  
     </motion.div>}
 
       {cardsAppear && <motion.div
-      className='col-span-1 w-[500px] h-[300px] overflow-hidden'
+      className='col-span-1 w-[600px] h-[300px] overflow-hidden'
       >
         <CardTwo setCursorSize={setCursorSize} setShowCard={setShowCard}/>
       </motion.div>}
@@ -73,9 +73,8 @@ function App() {
     </div>
     <div>
       {showCard.cardOne && <SinglePrompts setShowCard={setShowCard}/>}
-      {/* {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard}/>} */}
+      {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard}/>}
       {/* {showCard.cardTwo && <StreamPrompt />} */}
-      <ChatPrompt setShowCard={setShowCard}/>
     </div>
     </>
   )

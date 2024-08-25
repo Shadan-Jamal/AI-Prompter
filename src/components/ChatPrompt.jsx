@@ -61,53 +61,57 @@ function ChatPrompt({ setShowCard }) {
   return (
     <>
     <Font family='Exo' weight={500}>
-      <div className="w-screen h-auto cursor-default relative">
-        <motion.div
-          className='w-fit rounded-full p-3 hover:bg-zinc-700 sticky top-5 ml-5'>
-          <RxCross1
-            onClick={() => {
-              setShowCard((prev) => {
-                return { ...prev, cardTwo: false }
-              })
-            }}
-            size={"22px"}
-            className='text-white text-3xl' />
-        </motion.div>
+      <div className='w-screen h-screen py-10 cursor-default'>
+          <div className="w-full h-auto relative">
+            <motion.div
+              className='w-fit rounded-full p-3 hover:bg-zinc-700 sticky top-5 ml-5'>
+              <RxCross1
+                onClick={() => {
+                  setShowCard((prev) => {
+                    return { ...prev, cardTwo: false }
+                  })
+                }}
+                size={"22px"}
+                className='text-white text-3xl' />
+            </motion.div>
 
-        <div className='w-full absolute bottom-10 px-20'>
-          <motion.div className="w-full bg-zinc-600/60 p-3 rounded-lg">
-            <input
-            placeholder='Ask away...'
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleSubmit}
-              className='bg-transparent w-full text-white hover:outline-none focus:outline-none'
-              type="text" />
-          </motion.div>
-        </div>
-        <motion.div className='w-full p-8'>
-            {viewChat.length>1 && viewChat.map((chat,index) => {
-              if(index!=0){
-                return <div
-                className='flex flex-col gap-5 my-7'
-                key={index}
-                > 
-                <div className='flex flex-row gap-3 items-start'>
-                  <FaRegUserCircle size={'24px'} color='white' opacity={'0.8'} className='flex-shrink-0'/>
-                  <h1
-                  className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
-                  >{chat.question}</h1>
-                </div>
-  
-                <div className='flex flex-row gap-3 items-start'>
-                  <RiRobot3Fill size={'24px'} color='white' opacity={'0.5'} className='flex-shrink-0'/>
-                  <h1
-                  className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
-                  >{chat.answer}</h1>
-                </div>
-               </div>
-              }})}
-        </motion.div>
+            <motion.div
+            className='w-full fixed bottom-7 px-20'>
+              <motion.div className="w-full bg-zinc-600/60 p-3 rounded-lg">
+                <input
+                placeholder='Ask away...'
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleSubmit}
+                  className='bg-transparent w-full text-white hover:outline-none focus:outline-none'
+                  type="text" />
+              </motion.div>
+            </motion.div>
+
+            <motion.div className='w-full px-24'>
+                {viewChat.length>1 && viewChat.map((chat,index) => {
+                  if(index!=0){
+                    return <div
+                    className='flex flex-col gap-5 my-7'
+                    key={index}
+                    > 
+                    <div className='flex flex-row gap-3 items-start'>
+                      <FaRegUserCircle size={'24px'} color='white' opacity={'0.8'} className='flex-shrink-0'/>
+                      <h1
+                      className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
+                      >{chat.question}</h1>
+                    </div>
+      
+                    <div className='flex flex-row gap-3 items-start'>
+                      <RiRobot3Fill size={'24px'} color='white' opacity={'0.5'} className='flex-shrink-0'/>
+                      <h1
+                      className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
+                      >{chat.answer}</h1>
+                    </div>
+                  </div>
+                  }})}
+            </motion.div>
+          </div>
       </div>
     </Font>
     </>
