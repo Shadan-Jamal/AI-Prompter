@@ -3,6 +3,8 @@ import Font,{Text} from 'react-font';
 import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { motion } from 'framer-motion'
+import { FaRegUserCircle } from "react-icons/fa";
+import { RiRobot3Fill } from "react-icons/ri";
 
 function ChatPrompt({ setShowCard }) {
   const [input, setInput] = useState('')
@@ -59,9 +61,9 @@ function ChatPrompt({ setShowCard }) {
   return (
     <>
     <Font family='Exo' weight={500}>
-      <div className="w-screen h-screen bg-zinc-800 px-24 py-10 relative cursor-default">
+      <div className="w-screen h-auto cursor-default relative">
         <motion.div
-          className='absolute top-5 left-5 rounded-full p-3 hover:bg-zinc-700'>
+          className='w-fit rounded-full p-3 hover:bg-zinc-700 sticky top-5 ml-5'>
           <RxCross1
             onClick={() => {
               setShowCard((prev) => {
@@ -72,28 +74,39 @@ function ChatPrompt({ setShowCard }) {
             className='text-white text-3xl' />
         </motion.div>
 
-        <motion.div className="w-full bg-zinc-600/20 p-3 rounded-lg">
-          <input
-          placeholder='Ask away...'
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleSubmit}
-            className='bg-transparent w-full text-white hover:outline-none'
-            type="text" />
-        </motion.div>
+        <div className='w-full absolute bottom-10 px-20'>
+          <motion.div className="w-full bg-zinc-600/60 p-3 rounded-lg">
+            <input
+            placeholder='Ask away...'
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleSubmit}
+              className='bg-transparent w-full text-white hover:outline-none focus:outline-none'
+              type="text" />
+          </motion.div>
+        </div>
         <motion.div className='w-full p-8'>
-            {viewChat.map((chat,index) => {
-              return <div
-              key={index}
-              > 
-                <h1
-                className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 mb-5 rounded-xl overflow-auto'
-                >{`${chat.question}`}</h1>
-                <h1
-                className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 mb-5 rounded-xl overflow-auto'
-                >{`${chat.answer}`}</h1>
-             </div>
-            })}
+            {viewChat.length>1 && viewChat.map((chat,index) => {
+              if(index!=0){
+                return <div
+                className='flex flex-col gap-5 my-7'
+                key={index}
+                > 
+                <div className='flex flex-row gap-3 items-start'>
+                  <FaRegUserCircle size={'24px'} color='white' opacity={'0.8'} className='flex-shrink-0'/>
+                  <h1
+                  className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
+                  >{chat.question}</h1>
+                </div>
+  
+                <div className='flex flex-row gap-3 items-start'>
+                  <RiRobot3Fill size={'24px'} color='white' opacity={'0.5'} className='flex-shrink-0'/>
+                  <h1
+                  className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
+                  >{chat.answer}</h1>
+                </div>
+               </div>
+              }})}
         </motion.div>
       </div>
     </Font>

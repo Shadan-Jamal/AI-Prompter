@@ -13,6 +13,7 @@ body{
     box-sizing: border-box;
     background: radial-gradient(circle at 24.1% 68.8%,
      rgb(33, 32, 32) 0%, rgb(0, 0, 0) 99.4%);
+    background-size: contain;
     overflow-x: hidden;
     cursor : none;
 }
