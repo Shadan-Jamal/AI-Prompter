@@ -5,23 +5,23 @@ import Navbar from "./components/Navbar";
 import CardOne from './components/CardOne';
 import CardTwo from "./components/CardTwo";
 import SinglePrompts from './components/SinglePrompts';
-// import StreamPrompt from './components/StreamPrompt';
 import Cursor from './components/Cursor';
 import ChatPrompt from './components/ChatPrompt';
+// import StreamPrompt from './components/StreamPrompt';
 
 function App() {
   const [cursorSize,setCursorSize] = useState({w : 'w-5', h : 'h-5'});
   const [showCard,setShowCard] = useState({cardOne : false , cardTwo : false});
   const [cardsAppear, makeCardsAppear] = useState(false);
   const [color,changeColor] = useState('gray');
+  const [promptAppear , setPromptAppear] = useState(false);
+  console.log(promptAppear);
   
-
-  console.log(showCard);
   return (
     <>
     <Navbar />
     <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/>
-    <div className='grid grid-cols-2 grid-flow-row place-content-center place-items-center gap-10 w-full h-screen px-10'>
+    {promptAppear == false && <div className='grid grid-cols-2 grid-flow-row place-content-center place-items-center gap-10 w-full h-screen px-10'>
 
       {!cardsAppear && 
       <AnimatePresence>
@@ -47,15 +47,14 @@ function App() {
       
     {cardsAppear && <motion.div
     className='col-span-1 w-[600px] h-[300px] overflow-hidden'
-
     >
-      <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard}/>  
+      <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>  
     </motion.div>}
 
       {cardsAppear && <motion.div
       className='col-span-1 w-[600px] h-[300px] overflow-hidden'
       >
-        <CardTwo setCursorSize={setCursorSize} setShowCard={setShowCard}/>
+        <CardTwo setCursorSize={setCursorSize} setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>
       </motion.div>}
 
       {cardsAppear && <motion.div
@@ -70,12 +69,13 @@ function App() {
         </Font>
       </motion.div>}
       {cardsAppear && <div className='border border-zinc-600 col-span-2 w-full mt-8'></div>}
-    </div>
-    <div>
-      {showCard.cardOne && <SinglePrompts setShowCard={setShowCard}/>}
-      {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard}/>}
+    </div>}
+
+    {promptAppear == true && <div>
+      {showCard.cardOne && <SinglePrompts setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
+      {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
       {/* {showCard.cardTwo && <StreamPrompt />} */}
-    </div>
+    </div>}
     </>
   )
 }

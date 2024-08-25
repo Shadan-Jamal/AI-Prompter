@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { BsArrowRight } from "react-icons/bs";
 import Cursor from './Cursor';
 
-function SinglePrompts({setCursorSize , setShowCard}) {
+function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
 
   const [inputValue,setInputValue] = useState({input_one : "",input_two : ""});
   const [prompt, setPrompt] = useState('');
@@ -19,6 +19,13 @@ function SinglePrompts({setCursorSize , setShowCard}) {
     model : "gemini-1.5-flash",
     temperatute : 1.9, 
     systemInstruction : instruction});
+
+    const handleClick = () =>{
+      setPromptAppear(false);
+      setShowCard((prev) => {
+        return { ...prev, cardOne: false }
+      });
+    }
 
   const handleKeyDown = () => {
     console.log(inputValue);
@@ -58,11 +65,7 @@ function SinglePrompts({setCursorSize , setShowCard}) {
       <motion.div
           className='absolute top-5 left-5 rounded-full p-3 hover:bg-zinc-700'>
           <RxCross1
-            onClick={() => {
-              setShowCard((prev) => {
-                return { ...prev, cardOne: false }
-              })
-            }}
+            onClick={handleClick}
             size={"22px"}
             className='text-white text-3xl' />
         </motion.div>

@@ -3,7 +3,13 @@ import Font from "react-font";
 import { motion } from 'framer-motion';
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
-function CardTwo({setCursorSize,setShowCard}) {
+function CardTwo({setCursorSize,setShowCard,setPromptAppear}) {
+  const handleClick = () =>{
+    setPromptAppear(true);
+    setShowCard((prev) => {
+      return {...prev,CardTwo:true}
+    })
+  }
   return (
     <motion.div
     initial={{x : -500}}
@@ -26,9 +32,7 @@ function CardTwo({setCursorSize,setShowCard}) {
         <div className='w-full h-[0.2px] bg-white/95'></div>
         <div className='w-full py-6 px-3'>
           <motion.button
-          onClick={() => setShowCard((prev) => {
-            return {...prev,cardTwo:true}
-          })} 
+          onClick={handleClick} 
           className='text-white text-xl' 
           > <BsBoxArrowUpRight />
           </motion.button>

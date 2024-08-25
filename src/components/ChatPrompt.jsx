@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Font,{Text} from 'react-font';
+import Font from 'react-font';
 import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { motion } from 'framer-motion'
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiRobot3Fill } from "react-icons/ri";
 
-function ChatPrompt({ setShowCard }) {
+function ChatPrompt({ setShowCard,setPromptAppear }) {
   const [input, setInput] = useState('')
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
@@ -18,6 +18,13 @@ function ChatPrompt({ setShowCard }) {
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+  const handleClick = () =>{
+    setPromptAppear(false);
+    setShowCard((prev) => {
+      return { ...prev, cardTwo: false }
+    });
+  }
 
   const handleSubmit = (e) => {
     if (e.code === "Enter") {
@@ -66,11 +73,7 @@ function ChatPrompt({ setShowCard }) {
             <motion.div
               className='w-fit rounded-full p-3 hover:bg-zinc-700 sticky top-5 ml-5'>
               <RxCross1
-                onClick={() => {
-                  setShowCard((prev) => {
-                    return { ...prev, cardTwo: false }
-                  })
-                }}
+                onClick={handleClick}
                 size={"22px"}
                 className='text-white text-3xl' />
             </motion.div>
