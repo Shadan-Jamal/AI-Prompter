@@ -70,8 +70,8 @@ function App() {
       </motion.div>}
       {cardsAppear && <div className='border border-zinc-600 col-span-2 w-full mt-8'></div>}
     </div>}
-
-    {promptAppear == true && <div>
+        
+    {promptAppear && <div>
       {showCard.cardOne && <SinglePrompts setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
       {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
       {/* {showCard.cardTwo && <StreamPrompt />} */}

@@ -4,7 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { motion } from 'framer-motion';
 import { BsArrowRight } from "react-icons/bs";
-import Cursor from './Cursor';
+import { FaExclamation } from "react-icons/fa6";
 
 function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
 
@@ -13,6 +13,7 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
   const [output, setOutput] = useState('');
   const [instruction,addInstruction] = useState('');
   const [loading, setLoading] = useState(false);
+  const [modal,setModal] = useState(false);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({
@@ -60,57 +61,65 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
     
     <motion.div
     onMouseEnter={() => setCursorSize({ w:"w-16", h:"h-16"})}
-    className='w-full h-screen relative leading-7 pt-24 px-8'>
+    className='w-full h-screen relative leading-7 pt-20 px-20 mix-blend-difference'>
 
       <motion.div
-          className='absolute top-5 left-5 rounded-full p-3 hover:bg-zinc-700'>
+          className='absolute top-20 left-3 rounded-full p-3 cursor-pointer'>
           <RxCross1
             onClick={handleClick}
             size={"22px"}
             className='text-white text-3xl' />
-        </motion.div>
+      </motion.div>
 
     <Font family='Dosis' weight={700}>
-    <div className='grid grid-cols-2 place-content-center gap-9'>
-        <div className='col-span-2 mb-4 flex flex-row justify-center items-center gap-1'>
+    <div className='grid grid-cols-2 place-content-center gap-4'>
+        <div className='col-span-2 mb-1 flex flex-row justify-between items-center gap-7'>
+          {/* Input 1 */}
           <div className='w-full'>
-            <label 
-            htmlFor="prompt" 
-            className='text-4xl font-bold text-start tracking-widest text-white p-5'>Enter A Prompt. </label>
             <input
             id='prompt'
+            placeholder='Enter A Prompt..'
             value={inputValue.input_one}
             onChange={(e) => setInputValue((prevInput) => {
               return {...prevInput, input_one : e.target.value}
             })}
             // onKeyDown={(e) => handleKeyDown(e)}
-            className='w-[80%] text-[20px] text-white px-3 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
+            className='w-[100%] text-[20px] text-white px-1 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
             type="text" />
           </div>
 
-          <div className='w-full'>
-            <label 
-            htmlFor="instruction"
-            className='text-4xl font-bold text-start tracking-widest text-white px-2'
-            >Enter an Instruction for me..</label>
+            {/* Input 2 */}
+          <div className='w-full relative'>
             <input
             id='instruction'
+            placeholder='Enter an Instruction for me..'
             value={inputValue.input_two}
             onChange={(e) => setInputValue((prevInput) => {
                 return {...prevInput, input_two : e.target.value}
             })}
             // onKeyDown={(e) => handleKeyDown(e)}
-            className='w-[90%] text-[20px] text-white px-3 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
-            type="text" />
+            className='w-[100%] text-[20px] text-white px-1 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
+            type="text"/>
+            <FaExclamation 
+            color='white' 
+            size={'20px'}
+            onClick={() => setModal(!modal)} 
+            className='absolute right-3 top-4 cursor-pointer'/>
+
+            {modal && <motion.div
+            transition={{ease : 'easeInOut'}}
+            className='absolute right-0 top-14 bg-slate-800/50 p-3 rounded-lg -z-0'
+            >
+              <h1 className='text-sm text-wrap text-white font-extralight font-sans'>Use this prompt to specify the response behaviour of the bot..</h1>
+              </motion.div>}
           </div>
         </div>
-
-        <motion.div className='col-span-2 flex flex-row items-center justify-center relative'>
-          <motion.button
-          initial={{}} 
+        
+        <motion.div className=''>
+          <motion.button 
             onClick={handleKeyDown}
-          className="absolute right-[53vw]">
-            <BsArrowRight color='white' size={"40px"}/>
+          className="">
+            <BsArrowRight color='white' size={"24px"}/>
           </motion.button>
         </motion.div>
     </div>

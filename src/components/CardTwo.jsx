@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
 function CardTwo({setCursorSize,setShowCard,setPromptAppear}) {
+
   const handleClick = () =>{
-    setPromptAppear(true);
+    setPromptAppear(() => true);
     setShowCard((prev) => {
-      return {...prev,CardTwo:true}
+      return {...prev,cardTwo:true}
     })
   }
   return (
