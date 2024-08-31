@@ -5,11 +5,14 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 import { motion } from 'framer-motion'
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiRobot3Fill } from "react-icons/ri";
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import { BsChatRightDots } from "react-icons/bs";
 
 function ChatPrompt({ setShowCard,setPromptAppear }) {
   const [input, setInput] = useState('')
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
+  const [inputBox,closeInputBox] = useState(true);
   const [genChatHistory, setGenChatHistory] = useState([{
     role: "user",
     parts: [{ text: "Hello." }],
@@ -68,10 +71,10 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
   return (
     <>
     <Font family='Exo' weight={500}>
-      <div className='w-screen h-screen py-10 cursor-default'>
+      <div className='w-screen h-screen py-10 cursor-default mix-blend-difference'>
           <div className="w-full h-auto relative">
             <motion.div
-              className='w-fit rounded-full p-3 hover:bg-zinc-700 sticky top-5 ml-5'>
+              className='w-fit rounded-full p-3 absolute top-10 left-5'>
               <RxCross1
                 onClick={handleClick}
                 size={"22px"}
@@ -79,8 +82,21 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
             </motion.div>
 
             <motion.div
-            className='w-full fixed bottom-7 px-20'>
-              <motion.div className="w-full bg-zinc-600/60 p-3 rounded-lg">
+            className='w-full fixed bottom-10 px-20 flex flex-row items-center'>
+              {inputBox ? 
+              <motion.div className='rounded-l-lg bg-zinc-600/60 p-[2px]'
+              onClick={() => closeInputBox(false)}>
+                <FaLongArrowAltLeft color='rgb(255 255 255 / 0.9)' size={'20px'}/>
+              </motion.div> :
+              <div>
+                <BsChatRightDots
+                size={'20px'} 
+                color='rgb(255 255 255 / 0.9)'
+                onClick={() => closeInputBox(true)}
+              />
+            </div>
+            }
+              {inputBox && <motion.div className="w-full bg-zinc-600/60 p-3 rounded-lg shrink-0">
                 <input
                 placeholder='Ask away...'
                   value={input}
@@ -88,7 +104,7 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
                   onKeyDown={handleSubmit}
                   className='bg-transparent w-full text-white hover:outline-none focus:outline-none'
                   type="text" />
-              </motion.div>
+              </motion.div>}
             </motion.div>
 
             <motion.div className='w-full px-24'>

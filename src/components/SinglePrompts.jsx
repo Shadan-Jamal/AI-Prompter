@@ -57,7 +57,6 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
 
   return (
     <>
-    {/* <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/> */}
     
     <motion.div
     onMouseEnter={() => setCursorSize({ w:"w-16", h:"h-16"})}
@@ -127,7 +126,7 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
 
       {loading ?
       <Text family='Dosis' className='bg-transparent tracking-[2.4px] text-[35px] px-4 py-2'> Loading...</Text>
-      : output && <Text family='Dosis' className='bg-transparent tracking-[2.4px] max-w-[100vw] max-h-[550px] text-wrap text-[15px] whitespace-pre-wrap px-4 py-2 mt-[10vw] border-l-2 border-l-slate-300 overflow-auto font-light'>
+      : output && <Text family='Dosis' className='bg-transparent tracking-[2.4px] max-w-[100vw] max-h-[550px] text-wrap text-[15px] whitespace-pre-wrap px-4 py-2 mt-3 border-l-2 border-l-slate-300 overflow-auto font-light scrollbar'>
       {output}
       </Text>
       }
