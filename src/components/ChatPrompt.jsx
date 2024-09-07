@@ -33,7 +33,6 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
     if (e.keyCode === 13) {
       setPrompt(input);
       setInput('');
-      // console.log(genChatHistory);
     }
   }
 
@@ -55,11 +54,6 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
         setViewChat((prevChat) => {
           return [...prevChat, {question : prompt, answer : response}]
         });
-
-        console.log("running after setResult");
-        console.log(viewChat);
-
-        // console.log(genChatHistory)
       }
     }
 
@@ -122,83 +116,29 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
               </AnimatePresence>
             </motion.div>
 
-            <motion.div className='w-full h-[500px] lg:h-[580px] lg:mx-10 px-10 lg:px-24 lg:pb-24 overflow-y-scroll'>
-                {/* {viewChat.length>1 && viewChat.map((chat,index) => {
-                  if(index!=0){ */}
-                    {/* return  */}
-                    <div
-                    className='flex flex-col gap-5 my-4 lg:my-7 blur-inner'
-                    // key={index}
+            <motion.div className='w-full h-[500px] lg:h-[580px] lg:mx-10 px-4 lg:px-24 lg:pb-24 overflow-y-scroll'>
+                {viewChat.length>1 && viewChat.map((chat,index) => {
+                  if(index!=0){
+                    return <div
+                    className='flex flex-col gap-5 my-4 lg:my-7'
+                    key={index}
                     >
                       {/* Propmt  */}
                       <div className='flex flex-row gap-3 items-start'>
                         <FaRegUserCircle color='white' opacity={'0.8'} className='flex-shrink-0 text-base lg:text-2xl'/>
                         <h1
                         className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Hello</h1>
+                        >{chat.question}</h1>
                       </div>
                       {/* Response */}
                       <div className='flex flex-row gap-3 items-start'>
                         <RiRobot3Fill color='white' opacity={'0.5'} className='flex-shrink-0 text-base lg:text-2xl'/>
                         <h1
                         className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, quis.</h1>
-                      </div>
-                      <div className='flex flex-row gap-3 items-start'>
-                        <FaRegUserCircle color='white' opacity={'0.8'} className='flex-shrink-0 text-base lg:text-2xl'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Hello</h1>
-                      </div>
-                      {/* Response */}
-                      <div className='flex flex-row gap-3 items-start'>
-                        <RiRobot3Fill color='white' opacity={'0.5'} className='flex-shrink-0 text-base lg:text-2xl'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, quis.</h1>
-                      </div>
-                      <div className='flex flex-row gap-3 items-start'>
-                        <FaRegUserCircle color='white' opacity={'0.8'} className='flex-shrink-0 text-base lg:text-2xl'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Hello</h1>
-                      </div>
-                      {/* Response */}
-                      <div className='flex flex-row gap-3 items-start'>
-                        <RiRobot3Fill color='white' opacity={'0.5'} className='flex-shrink-0 text-base lg:text-2xl'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, quis.</h1>
-                      </div>
-                      <div className='flex flex-row gap-3 items-start'>
-                        <FaRegUserCircle color='white' opacity={'0.8'} className='flex-shrink-0 text-base lg:text-2xl'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Hello</h1>
-                      </div>
-                      {/* Response */}
-                      <div className='flex flex-row gap-3 items-start'>
-                        <RiRobot3Fill color='white' opacity={'0.5'} className='flex-shrink-0 text-base lg:text-2xl'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
-                        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, quis.</h1>
-                      </div>
-                      
-                      <div className='flex flex-row gap-3 items-start'>
-                        <FaRegUserCircle size={'24px'} color='white' opacity={'0.8'} className='flex-shrink-0'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
-                        >Hello</h1>
-                      </div>
-                      {/* Response */}
-                      <div className='flex flex-row gap-3 items-start'>
-                        <RiRobot3Fill size={'24px'} color='white' opacity={'0.5'} className='flex-shrink-0'/>
-                        <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-4 py-3 rounded-xl overflow-auto'
-                        >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, quis.</h1>
+                        >{chat.answer}</h1>
                       </div>
                   </div>
-                  {/* }})} */}
+                }})}
             </motion.div>
           </div>
       </div>

@@ -29,14 +29,12 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
     }
 
   const handleKeyDown = () => {
-    console.log(inputValue);
       setLoading(true);
       setPrompt(() => inputValue.input_one)
       addInstruction(() => inputValue.input_two)
   }
 
   useEffect(() => {
-    console.log(prompt);
     const fetchData = async () => {
       if(prompt.length > 0 && inputValue.input_one.length > 0){
         const result = await model.generateContent(prompt);
@@ -44,7 +42,6 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
         setOutput(() => {
           const text = response.text();
           setLoading(false);
-          console.log(text,loading);
           return text;
         });
       }
