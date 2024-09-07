@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import Font,{Text} from 'react-font';
 import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BsArrowRight } from "react-icons/bs";
 import { FaExclamation } from "react-icons/fa6";
 
@@ -58,10 +58,10 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
     
     <motion.div
     onMouseEnter={() => setCursorSize({ w:"w-16", h:"h-16"})}
-    className='w-full h-screen relative leading-7 pt-16 px-12 lg:pt-20 lg:px-20 mix-blend-difference'>
+    className='w-full h-screen relative leading-7 pt-16 px-5 lg:pt-20 lg:px-20 mix-blend-difference'>
 
       <motion.div
-          className='absolute top-10 left-0 lg:top-20 lg:left-3 rounded-full p-3 cursor-pointer'>
+          className='absolute top-12 left-2 lg:top-20 lg:left-3 rounded-full p-3 cursor-pointer'>
           <RxCross1
             onClick={handleClick}
             className='text-white lg:text-3xl' />
@@ -71,7 +71,7 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
     <div className='grid grid-cols-2 place-content-center gap-4'>
         <div className='col-span-2 mb-1 flex flex-col lg:flex-row justify-between items-center gap-5 lg:gap-7'>
           {/* Input 1 */}
-          <div className='w-full'>
+          <div className='w-full px-12'>
             <input
             id='prompt'
             placeholder='Enter A Prompt..'
@@ -84,7 +84,7 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
           </div>
 
             {/* Input 2 */}
-          <div className='w-full relative'>
+          <div className='w-full relative px-12'>
             <input
             id='instruction'
             placeholder='Enter an Instruction for me..'
@@ -97,30 +97,36 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
             <FaExclamation 
             color='white' 
             onClick={() => setModal(!modal)} 
-            className='absolute right-3 top-[6px] text-base lg:text-lg lg:top-4 cursor-pointer'/>
+            className='absolute right-11 top-[6px] text-base lg:text-lg lg:top-4 cursor-pointer'/>
 
-            {modal && <motion.div
-            transition={{ease : 'easeInOut'}}
-            className='w-48 absolute right-0 top-10 lg:top-14 bg-slate-800/50 p-3 rounded-lg -z-0'
-            >
-              <h1 className='text-xs lg:text-sm text-wrap text-white font-extralight font-sans'>Use this prompt to specify the response behaviour of the bot.</h1>
-              </motion.div>}
+            <AnimatePresence>
+                {modal && <motion.div
+                initial={{opacity : 0}}
+                animate={{opacity : 1}}
+                exit={{opacity : 0}}
+                transition={{ease : 'easeInOut'}}
+                className='w-48 absolute right-0 top-10 lg:top-14 bg-slate-800/50 p-3 rounded-lg -z-0'
+                >
+                  <h1 className='text-xs lg:text-sm text-wrap text-white font-extralight font-sans'>Use this prompt to specify the response behaviour of the bot.</h1>
+                  </motion.div>}
+              </AnimatePresence>
           </div>
+
+          <motion.div className='self-start pl-12'>
+            <motion.button 
+              onClick={handleKeyDown}
+            className="text-base lg:text-2xl">
+              <BsArrowRight color='white'/>
+            </motion.button>
+          </motion.div>
         </div>
         
-        <motion.div className=''>
-          <motion.button 
-            onClick={handleKeyDown}
-          className="text-base lg:text-2xl">
-            <BsArrowRight color='white'/>
-          </motion.button>
-        </motion.div>
     </div>
     </Font>
 
       {loading ?
-      <Text family='Dosis' className='bg-transparent tracking-[2.4px] text-[35px] px-4 py-2'> Loading...</Text>
-      : output && <Text family='Dosis' className='bg-transparent tracking-[2.4px] max-w-[100vw] max-h-[550px] text-wrap text-[15px] whitespace-pre-wrap px-4 py-2 mt-3 border-l-2 border-l-slate-300 overflow-auto font-light scrollbar'>
+      <Text family='Montserrat' weight={100} className='bg-transparent tracking-[2.4px] text-base lg:text-[35px] px-4 py-2'> Loading...</Text>
+      : output && <Text family='Montserrat' weight={100} className='bg-transparent tracking-[2.4px] leading-[20px] max-w-screen max-h-[400px] lg:max-h-[550px] text-wrap text-[8px] lg:text-[15px] whitespace-pre-wrap px-4 py-2 mt-3 border-l-[1px] border-l-slate-300 overflow-auto scrollbar'>
       {output}
       </Text>
       }
