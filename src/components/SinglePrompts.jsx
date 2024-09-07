@@ -53,26 +53,23 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
 
   },[prompt,setPrompt,loading]);
 
-  console.log(inputValue);
-
   return (
     <>
     
     <motion.div
     onMouseEnter={() => setCursorSize({ w:"w-16", h:"h-16"})}
-    className='w-full h-screen relative leading-7 pt-20 px-20 mix-blend-difference'>
+    className='w-full h-screen relative leading-7 pt-16 px-12 lg:pt-20 lg:px-20 mix-blend-difference'>
 
       <motion.div
-          className='absolute top-20 left-3 rounded-full p-3 cursor-pointer'>
+          className='absolute top-10 left-0 lg:top-20 lg:left-3 rounded-full p-3 cursor-pointer'>
           <RxCross1
             onClick={handleClick}
-            size={"22px"}
-            className='text-white text-3xl' />
+            className='text-white lg:text-3xl' />
       </motion.div>
 
     <Font family='Dosis' weight={700}>
     <div className='grid grid-cols-2 place-content-center gap-4'>
-        <div className='col-span-2 mb-1 flex flex-row justify-between items-center gap-7'>
+        <div className='col-span-2 mb-1 flex flex-col lg:flex-row justify-between items-center gap-5 lg:gap-7'>
           {/* Input 1 */}
           <div className='w-full'>
             <input
@@ -82,8 +79,7 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
             onChange={(e) => setInputValue((prevInput) => {
               return {...prevInput, input_one : e.target.value}
             })}
-            // onKeyDown={(e) => handleKeyDown(e)}
-            className='w-[100%] text-[20px] text-white px-1 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
+            className='w-[100%] text-base lg:text-[20px] text-white px-1 py-[5px] lg:py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
             type="text" />
           </div>
 
@@ -96,20 +92,18 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
             onChange={(e) => setInputValue((prevInput) => {
                 return {...prevInput, input_two : e.target.value}
             })}
-            // onKeyDown={(e) => handleKeyDown(e)}
-            className='w-[100%] text-[20px] text-white px-1 py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
+            className='w-[100%] text-base lg:text-[20px] text-white px-1 py-[5px] lg:py-3 bg-transparent border-b-2 border-b-white focus:outline-none' 
             type="text"/>
             <FaExclamation 
             color='white' 
-            size={'20px'}
             onClick={() => setModal(!modal)} 
-            className='absolute right-3 top-4 cursor-pointer'/>
+            className='absolute right-3 top-[6px] text-base lg:text-lg lg:top-4 cursor-pointer'/>
 
             {modal && <motion.div
             transition={{ease : 'easeInOut'}}
-            className='absolute right-0 top-14 bg-slate-800/50 p-3 rounded-lg -z-0'
+            className='w-48 absolute right-0 top-10 lg:top-14 bg-slate-800/50 p-3 rounded-lg -z-0'
             >
-              <h1 className='text-sm text-wrap text-white font-extralight font-sans'>Use this prompt to specify the response behaviour of the bot..</h1>
+              <h1 className='text-xs lg:text-sm text-wrap text-white font-extralight font-sans'>Use this prompt to specify the response behaviour of the bot.</h1>
               </motion.div>}
           </div>
         </div>
@@ -117,8 +111,8 @@ function SinglePrompts({setCursorSize , setShowCard ,setPromptAppear}) {
         <motion.div className=''>
           <motion.button 
             onClick={handleKeyDown}
-          className="">
-            <BsArrowRight color='white' size={"24px"}/>
+          className="text-base lg:text-2xl">
+            <BsArrowRight color='white'/>
           </motion.button>
         </motion.div>
     </div>
