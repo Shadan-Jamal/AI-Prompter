@@ -30,7 +30,7 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
   }
 
   const handleSubmit = (e) => {
-    if (e.code === "Enter") {
+    if (e.keyCode === 13) {
       setPrompt(input);
       setInput('');
       // console.log(genChatHistory);
@@ -71,10 +71,10 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
   return (
     <>
     <Font family='Exo' weight={500}>
-      <div className='w-screen h-screen py-10 mix-blend-difference flex justify-center items-center'>
+      <div className='w-screen h-screen py-10 mix-blend-difference flex justify-center items-center overflow-x-hidden'>
           <div className="w-full h-auto relative">
             <motion.div
-              className='w-fit rounded-full p-3 absolute top-1 left-5'>
+              className='w-fit rounded-full p-3 absolute top-1 left-5 cursor-pointer'>
               <RxCross1
                 onClick={handleClick}
                 size={"22px"}

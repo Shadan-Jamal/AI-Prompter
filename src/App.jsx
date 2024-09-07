@@ -17,13 +17,13 @@ function App() {
   const [promptAppear , setPromptAppear] = useState(false);
   const windowWidth = window.innerWidth;
   
-
+  
   return (
     <>
     <Navbar />
     {windowWidth>1000 && <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/>}
 
-    {promptAppear == false && <div className='grid grid-cols-2 place-content-center place-items-center gap-7 lg:gap-10 w-dvw h-dvh px-10 overflow-x-hidden'>
+    {promptAppear == false && <div className='grid grid-cols-2 place-content-center place-items-center gap-10 px-10 pt-10 lg:gap-10 h-screen'>
 
       {!cardsAppear && 
       <AnimatePresence>
@@ -48,13 +48,13 @@ function App() {
 
       
     {cardsAppear && <motion.div
-    className='col-span-2 md:col-span-1 w-full h-[240px] lg:h-[300px] overflow-hidden'
+    className='col-span-2 md:col-span-1 w-full h-[180px] lg:h-[300px] overflow-hidden'
     >
       <CardOne setCursorSize={setCursorSize} setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>  
     </motion.div>}
 
     {cardsAppear && <motion.div
-    className='col-span-2 md:col-span-1 h-[240px] lg:h-[300px] overflow-hidden'
+    className='col-span-2 md:col-span-1 h-[200px] lg:h-[300px] overflow-hidden'
     >
       <CardTwo setCursorSize={setCursorSize} setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>
     </motion.div>}
@@ -66,7 +66,7 @@ function App() {
         <Font family='DM Serif Display' weight={800}>
           <motion.p
           // transition={{type:"tween"}}
-          className='text-4xl lg:text-7xl tracking-tight capitalize text-center text-white'>Choose an option
+          className='text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white'>Make your choice.
           </motion.p>
         </Font>
       </motion.div>}

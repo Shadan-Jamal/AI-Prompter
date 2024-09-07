@@ -18,8 +18,8 @@ function CardTwo({setCursorSize,setShowCard,setPromptAppear}) {
     transition={{delay :0.1 , type : 'spring' , ease : 'linear'}} 
     onMouseEnter={() => setCursorSize({w : "w-12", h : "h-12"})}
     onMouseLeave={() => setCursorSize({w : "w-5", h : "h-5"})}
-    className='w-[90%] h-full px-5 lg:px-7 pt-4 lg:pt-7 bg-zinc-300/10 rounded-3xl flex flex-col justify-evenly items-center hover:cursor-none'>
-        <div className='text-white w-full mb-6'>
+    className='w-full h-full px-5 lg:px-7 pt-4 lg:pt-7 bg-zinc-300/10 rounded-3xl flex flex-col justify-evenly items-center hover:cursor-none'>
+        <div className='text-white w-full mb-3 lg:mb-6'>
           <Font family='Prata' weight={400}>
             <h3 className='text-2xl lg:text-3xl mb-3'>Chat Bot</h3>
           </Font>
