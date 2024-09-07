@@ -28,3 +28,7 @@ p{
 .scrollbar{
     scrollbar-width: 5px;
 }
+
+.blur-inner{
+    box-shadow: inset 0 0 -6px white;
+}
