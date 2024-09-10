@@ -15,13 +15,12 @@ function App() {
   const [cardsAppear, makeCardsAppear] = useState(false);
   const [color,changeColor] = useState('gray');
   const [promptAppear , setPromptAppear] = useState(false);
-  const windowWidth = window.innerWidth;
-  
+  const [hover,setHover] = useState(false);
   
   return (
     <>
     <Navbar />
-    {windowWidth>1000 && <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/>}
+    {window.innerWidth>1000 && <Cursor cursorSize={cursorSize} setCursorSize={setCursorSize}/>}
 
     {promptAppear == false && <div className='grid grid-cols-2 place-content-center place-items-center gap-10 px-10 pt-10 lg:gap-10 h-screen'>
 
@@ -33,14 +32,14 @@ function App() {
       animate={{scale : 1}}
       exit={{scale : 0}}
       transition={{delay : 0.1, ease: 'easeInOut' , type: spring}}
-      className='rounded-full p-5 col-span-2 transition-colors'
+      className='rounded-full px-4 py-2 col-span-2 transition-colors'
       onHoverStart={() => changeColor('black')}
       onHoverEnd={() => changeColor('white')}
       onClick={() => makeCardsAppear(true)}
       >
         <Font family='Oswald' weight={500}>
           <h1 className={`${color === "black" ? 'text-white' : 'text-black'} text-xl tracking-wide`}>
-          Click Here
+          Click
           </h1>
         </Font>
       </motion.div>
@@ -64,10 +63,24 @@ function App() {
       onMouseLeave={() => setCursorSize({ w : 'w-5', h: 'h-5'})}  
       className='col-span-2 h-fit'>
         <Font family='DM Serif Display' weight={800}>
-          <motion.p
+          <motion.div
+          onMouseLeave={() => setHover(false)}
+          className='flex flex-row gap-3 cursor-default'
+          >
+          {['M','a','k','e','y','o','u','r','c','h','o','i','c','e'].map((alphabet,index) => {
+            return <motion.p
+            onMouseEnter={() => setHover(true)}
+            initial={{transform : 'translateY(0)'}}
+            animate={{transform: `translateY(${hover ? '50px' : '0px'})`}}
+            key={index}
+            transition={{ease : 'linear' , type : 'spring'}}
+            className={`text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white mix-blend-difference`}>{alphabet}</motion.p>
+          })}
+          </motion.div>
+          {/* <motion.p
           // transition={{type:"tween"}}
           className='text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white'>Make your choice.
-          </motion.p>
+          </motion.p> */}
         </Font>
       </motion.div>}
       {cardsAppear && <div className='border border-zinc-600 col-span-2 w-full lg:mt-8'></div>}

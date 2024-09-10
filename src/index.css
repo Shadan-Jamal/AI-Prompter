@@ -12,6 +12,7 @@ body{
      rgb(33, 32, 32) 0%, rgb(0, 0, 0) 99.4%);
     background-size: cover;
     cursor : none;
+    overflow: hidden;
 }
 
 p{
