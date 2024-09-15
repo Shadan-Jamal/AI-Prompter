@@ -18,6 +18,7 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
     parts: [{ text: "Hello." }],
   }]);
   const [viewChat,setViewChat] = useState([{}]);
+  const [chatHeight, setChatHeight] = useState(window.innerHeight);
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -61,6 +62,18 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
       generate();
     }
   }, [prompt])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setChatHeight(window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -116,25 +129,27 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
               </AnimatePresence>
             </motion.div>
 
-            <motion.div className='w-full h-dvh lg:h-[580px] lg:mx-10 px-4 lg:px-24 lg:pb-24 overflow-y-scroll'>
+            <motion.div 
+            style={{ height: chatHeight - 60 }}
+            className='w-full h-[550px] lg:h-[580px] lg:mx-10 px-4 lg:px-24 lg:pb-24 overflow-y-scroll'>
                 {viewChat.length>1 && viewChat.map((chat,index) => {
                   if(index!=0){
                     return <div
                     className='flex flex-col gap-5 my-4 lg:my-7'
                     key={index}
                     >
-                      {/* Propmt  */}
+                      {/* Prompt  */}
                       <div className='flex flex-row gap-3 items-start'>
                         <FaRegUserCircle color='white' opacity={'0.8'} className='flex-shrink-0 text-base lg:text-2xl'/>
                         <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[12px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
+                        className='text-white tracking-[2.4px] text-wrap text-[12px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto scrollbar'
                         >{chat.question}</h1>
                       </div>
                       {/* Response */}
                       <div className='flex flex-row gap-3 items-start'>
                         <RiRobot3Fill color='white' opacity={'0.5'} className='flex-shrink-0 text-base lg:text-2xl'/>
                         <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[12px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
+                        className='text-white tracking-[2.4px] text-wrap text-[12px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto scrollbar'
                         >{chat.answer}</h1>
                       </div>
                   </div>
