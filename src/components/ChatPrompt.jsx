@@ -127,14 +127,14 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
                       <div className='flex flex-row gap-3 items-start'>
                         <FaRegUserCircle color='white' opacity={'0.8'} className='flex-shrink-0 text-base lg:text-2xl'/>
                         <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
+                        className='text-white tracking-[2.4px] text-wrap text-[12px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
                         >{chat.question}</h1>
                       </div>
                       {/* Response */}
                       <div className='flex flex-row gap-3 items-start'>
                         <RiRobot3Fill color='white' opacity={'0.5'} className='flex-shrink-0 text-base lg:text-2xl'/>
                         <h1
-                        className='text-white tracking-[2.4px] text-wrap text-[10px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
+                        className='text-white tracking-[2.4px] text-wrap text-[12px] lg:text-[15px] whitespace-pre-wrap bg-slate-600/10 shadow-slate-100 shadow-sm px-3 lg:px-4 py-2 lg:py-3 rounded-lg max-h-[200px] overflow-auto'
                         >{chat.answer}</h1>
                       </div>
                   </div>

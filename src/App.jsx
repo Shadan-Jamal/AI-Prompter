@@ -16,7 +16,7 @@ function App() {
   const [color,changeColor] = useState('gray');
   const [promptAppear , setPromptAppear] = useState(false);
   const [hover,setHover] = useState(false);
-  
+  console.log(window.innerWidth)
   return (
     <>
     <Navbar />
@@ -67,20 +67,23 @@ function App() {
           onMouseLeave={() => setHover(false)}
           className='flex flex-row gap-3 cursor-default'
           >
-          {['M','a','k','e','y','o','u','r','c','h','o','i','c','e'].map((alphabet,index) => {
-            return <motion.p
-            onMouseEnter={() => setHover(true)}
-            initial={{transform : 'translateY(0)'}}
-            animate={{transform: `translateY(${hover ? '50px' : '0px'})`}}
-            key={index}
-            transition={{ease : 'linear' , type : 'spring'}}
-            className={`text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white mix-blend-difference`}>{alphabet}</motion.p>
-          })}
+          {
+            window.innerWidth < 500 ? 
+            <motion.p
+            // transition={{type:"tween"}}
+            className='text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white'>Make your choice.
+            </motion.p> :
+            ['M','a','k','e','y','o','u','r','c','h','o','i','c','e'].map((alphabet,index) => {
+              return <motion.p
+              onMouseEnter={() => setHover(true)}
+              initial={{transform : 'translateY(0)'}}
+              animate={{transform: `translateY(${hover ? '50px' : '0px'})`}}
+              key={index}
+              transition={{ease : 'linear' , type : 'spring'}}
+              className={`text-base sm:text-4xl  md:text-5xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white mix-blend-difference`}>{alphabet}</motion.p>
+            })
+          }
           </motion.div>
-          {/* <motion.p
-          // transition={{type:"tween"}}
-          className='text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white'>Make your choice.
-          </motion.p> */}
         </Font>
       </motion.div>}
       {cardsAppear && <div className='border border-zinc-600 col-span-2 w-full lg:mt-8'></div>}
