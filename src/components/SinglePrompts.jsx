@@ -42,12 +42,11 @@ function SinglePrompts({setShowCard ,setPromptAppear}) {
     const fetchData = async () => {
       if(prompt.length > 0 && inputValue.input_one.length > 0){
         try{
-          const result = await model.generateContent(prompt);
-          const response = await result.response;
-          setOutput(() => {
-            const text = response.text();
-            return text;
-          });
+          const result = await model.generateContentStream([prompt]);
+          for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            setOutput((prev) => prev + chunkText);
+          }
         }
         catch(err){
           setOutput("Encountered an error. Kindly try again or enter a different prompt")
