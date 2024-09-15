@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect , useCallback} from 'react';
 import Font,{Text} from 'react-font';
 import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -16,8 +16,6 @@ function SinglePrompts({setShowCard ,setPromptAppear}) {
   const [modal,setModal] = useState(false);
   const [arrow, rotateArrow] = useState(false);
   
-  console.log(arrow);
-  
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
   const model = genAI.getGenerativeModel({
     model : "gemini-1.5-flash",
@@ -31,28 +29,37 @@ function SinglePrompts({setShowCard ,setPromptAppear}) {
       });
     }
 
-  const handleKeyDown = () => {
-      rotateArrow(true);
-      setLoading(true);
-      setPrompt(() => inputValue.input_one)
-      addInstruction(() => inputValue.input_two)
-  }
+    const handleKeyDown = useCallback(() => {
+      if (inputValue.input_one) {
+        rotateArrow(true);
+        setLoading(true);
+        setPrompt(inputValue.input_one);
+        addInstruction(inputValue.input_two);
+      }
+    }, [inputValue]);
 
   useEffect(() => {
     const fetchData = async () => {
       if(prompt.length > 0 && inputValue.input_one.length > 0){
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        setOutput(() => {
-          const text = response.text();
+        try{
+          const result = await model.generateContent(prompt);
+          const response = await result.response;
+          setOutput(() => {
+            const text = response.text();
+            return text;
+          });
+        }
+        catch(err){
+          setOutput("Encountered an error. Kindly try again or enter a different prompt")
+        }
+        finally{
           setLoading(false);
-          return text;
-        });
+        }
       }
     }
     fetchData();
 
-  },[prompt,setPrompt,loading]);
+  },[prompt,loading]);
 
   return (
     <>
@@ -128,10 +135,10 @@ function SinglePrompts({setShowCard ,setPromptAppear}) {
     </Font>
 
       {loading ?
-      <Text family='Montserrat' weight={100} className='bg-transparent tracking-[2.4px] text-base lg:text-[35px] px-4 py-4'>
+      <Text family='Montserrat' weight={100} className='bg-transparent tracking-[2.4px] text-xl lg:text-[35px] px-4 py-4'>
          {`${inputValue.input_one.length == 0 ? 'Please enter the first prompt' : 'Loading...'}`}
       </Text>
-      : output && <Text family='Montserrat' weight={100} className='bg-transparent tracking-[2.4px] leading-[20px] max-w-screen max-h-[400px] lg:max-h-[550px] text-wrap text-[8px] lg:text-[15px] whitespace-pre-wrap px-4 py-7 mt-3 border-l-[1px] border-l-slate-300 overflow-auto scrollbar'>
+      : output && <Text family='Montserrat' weight={100} className='bg-transparent tracking-[2.4px] leading-[20px] max-w-screen max-h-[450px] lg:max-h-[550px] text-wrap text-[15px] lg:text-[15px] whitespace-pre-wrap px-4 py-7 mt-3 border-l-[1px] border-l-slate-300 overflow-auto scrollbar'>
       {output}
       </Text>
       }

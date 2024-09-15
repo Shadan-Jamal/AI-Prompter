@@ -16,7 +16,6 @@ function App() {
   const [color,changeColor] = useState('gray');
   const [promptAppear , setPromptAppear] = useState(false);
   const [hover,setHover] = useState(false);
-  console.log(window.innerWidth)
   return (
     <>
     <Navbar />
