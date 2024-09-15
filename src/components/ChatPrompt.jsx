@@ -130,7 +130,7 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
             </motion.div>
 
             <motion.div 
-            style={{ height: chatHeight - 60 }}
+            style={{ height: chatHeight - 160 }}
             className='w-full h-[550px] lg:h-[580px] lg:mx-10 px-4 lg:px-24 lg:pb-24 overflow-y-scroll'>
                 {viewChat.length>1 && viewChat.map((chat,index) => {
                   if(index!=0){
