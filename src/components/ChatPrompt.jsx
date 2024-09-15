@@ -116,7 +116,7 @@ function ChatPrompt({ setShowCard,setPromptAppear }) {
               </AnimatePresence>
             </motion.div>
 
-            <motion.div className='w-full h-[500px] lg:h-[580px] lg:mx-10 px-4 lg:px-24 lg:pb-24 overflow-y-scroll'>
+            <motion.div className='w-full h-dvh lg:h-[580px] lg:mx-10 px-4 lg:px-24 lg:pb-24 overflow-y-scroll'>
                 {viewChat.length>1 && viewChat.map((chat,index) => {
                   if(index!=0){
                     return <div
