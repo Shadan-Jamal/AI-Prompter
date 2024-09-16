@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Font from 'react-font';
-import { AnimatePresence, easeInOut, motion, spring, useMotionValue } from 'framer-motion';
+import { AnimatePresence, delay, motion, spring } from 'framer-motion';
 import Navbar from "./components/Navbar";
 import CardOne from './components/CardOne';
 import CardTwo from "./components/CardTwo";
 import SinglePrompts from './components/SinglePrompts';
 import Cursor from './components/Cursor';
 import ChatPrompt from './components/ChatPrompt';
-// import StreamPrompt from './components/StreamPrompt';
+import Links from './components/Links';
 
 function App() {
   const [cursorSize,setCursorSize] = useState({w : 'w-5', h : 'h-5'});
@@ -15,7 +15,8 @@ function App() {
   const [cardsAppear, makeCardsAppear] = useState(false);
   const [color,changeColor] = useState('gray');
   const [promptAppear , setPromptAppear] = useState(false);
-  const [hover,setHover] = useState(false);
+  const [hover,setHover] = useState(false); 
+
   return (
     <>
     <Navbar />
@@ -60,26 +61,38 @@ function App() {
       {cardsAppear && <motion.div
       onMouseEnter={() => setCursorSize({w : 'w-24' , h : 'h-24'})}
       onMouseLeave={() => setCursorSize({ w : 'w-5', h: 'h-5'})}  
-      className='col-span-2 h-fit'>
+      className='col-span-2 h-fit lg:w-[60vw] relative'>
+        {hover && <motion.p
+        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl capitalize text-center mix-blend-difference playwrite-es-deco-textfont'
+        initial={{opacity : 0}}
+        animate={{opacity : 1}}
+        transition={{delay : 0.5 , ease : 'easeInOut'}}
+        >
+          Made by Shadan Jamal
+        </motion.p>}
+        <motion.div
+        animate={{transform : 'translateX(57vw)', width: ['5px','30px','5px']}}
+        transition={{ease : 'linear' , repeat : Infinity, repeatType : 'reverse' , duration : 2 }}
+        className='absolute w-2 h-full bg-white rotate-12 mix-blend-difference'
+        ></motion.div>
         <Font family='DM Serif Display' weight={800}>
           <motion.div
+          onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          className='flex flex-row gap-3 cursor-default'
+          className='flex flex-row gap-3 cursor-default mix-blend-difference justify-center'
           >
           {
             window.innerWidth < 500 ? 
             <motion.p
-            // transition={{type:"tween"}}
             className='text-4xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white'>Make your choice.
             </motion.p> :
             ['M','a','k','e','y','o','u','r','c','h','o','i','c','e'].map((alphabet,index) => {
               return <motion.p
-              onMouseEnter={() => setHover(true)}
-              initial={{transform : 'translateY(0)'}}
-              animate={{transform: `translateY(${hover ? '50px' : '0px'})`}}
-              key={index}
+              initial={{transform : 'translateY(0px)'}}
+              animate={{transform: `translateY(${hover ? '80px' : '0px'})`}}
               transition={{ease : 'linear' , type : 'spring'}}
-              className={`text-base sm:text-4xl  md:text-5xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white mix-blend-difference`}>{alphabet}</motion.p>
+              key={index}
+              className={`text-base sm:text-4xl md:text-5xl lg:text-7xl tracking-wide md:tracking-tight capitalize text-center text-white mix-blend-difference`}>{alphabet}</motion.p>
             })
           }
           </motion.div>
@@ -91,8 +104,9 @@ function App() {
     {promptAppear && <div>
       {showCard.cardOne && <SinglePrompts setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
       {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
-      {/* {showCard.cardTwo && <StreamPrompt />} */}
     </div>}
+
+    <Links />
     </>
   )
 }

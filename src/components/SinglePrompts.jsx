@@ -29,14 +29,14 @@ function SinglePrompts({setShowCard ,setPromptAppear}) {
       });
     }
 
-    const handleKeyDown = useCallback(() => {
+    const handleKeyDown = () => {
       if (inputValue.input_one) {
         rotateArrow(true);
         setLoading(true);
         setPrompt(inputValue.input_one);
         addInstruction(inputValue.input_two);
       }
-    }, [inputValue]);
+    };
 
   useEffect(() => {
     const fetchData = async () => {
