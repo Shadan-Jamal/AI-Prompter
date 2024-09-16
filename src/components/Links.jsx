@@ -9,7 +9,7 @@ function Links() {
   const [openLinks , setOpenLinks] = useState(false); 
   return (
     <div 
-    className='absolute bottom-5 right-5 h-auto rounded p-4 flex flex-col justify-center items-center gap-3 mix-blend-difference'>
+    className='absolute bottom-5 right-5 -z-50 h-auto rounded p-4 flex flex-col justify-center items-center gap-3 mix-blend-difference'>
         {openLinks && <>
             <motion.div
             initial={{y : 70}}
