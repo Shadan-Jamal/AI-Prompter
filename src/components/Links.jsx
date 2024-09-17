@@ -9,12 +9,12 @@ function Links() {
   const [openLinks , setOpenLinks] = useState(false); 
   return (
     <div 
-    className='absolute bottom-5 right-5 -z-50 h-auto rounded p-4 flex flex-col justify-center items-center gap-3 mix-blend-difference'>
+    className='absolute bottom-5 right-5 h-auto rounded p-4 flex flex-col justify-center items-center gap-3 mix-blend-difference'>
         {openLinks && <>
             <motion.div
             initial={{y : 70}}
             animate={{y : 0}}
-            transition={{type:'spring' , duration : 0.2}}
+            transition={{type:'spring' , duration : 0.5}}
             className='rounded-full bg-slate-900 text-xl'
             >
                 <a href="https://github.com/Shadan-Jamal">
@@ -25,7 +25,7 @@ function Links() {
             <motion.div
             initial={{y : 30}}
             animate={{y : 0}}
-            transition={{type : 'spring'}}
+            transition={{type : 'spring' , duration : 0.5}}
             className='rounded-full bg-slate-900 text-xl'
             >   
                 <a href="https://www.instagram.com/bca_coffee_waale/">
@@ -36,7 +36,7 @@ function Links() {
             <motion.div
             initial={{y : 20}}
             animate={{y : 0}}
-            transition={{type : 'spring'}}
+            transition={{type : 'spring' , duration : 0.5}}
             className='rounded-full bg-slate-900'
             >
                 <a href="https://www.linkedin.com/in/shadan-jamal-99696824b/">

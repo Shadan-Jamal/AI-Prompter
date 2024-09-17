@@ -106,7 +106,7 @@ function App() {
       {showCard.cardTwo && <ChatPrompt setShowCard={setShowCard} setPromptAppear={setPromptAppear}/>}
     </div>}
 
-    <Links />
+    {!promptAppear && <Links />}
     </>
   )
 }
