@@ -71,7 +71,7 @@ function App() {
           Made by Shadan Jamal
         </motion.p>}
         <motion.div
-        animate={{transform : 'translateX(57vw)', width: ['5px','30px','5px']}}
+        animate={{transform : 'translateX(59vw)', width: ['5px','30px','5px']}}
         transition={{ease : 'linear' , repeat : Infinity, repeatType : 'reverse' , duration : 2 }}
         className='absolute w-2 h-full bg-white rotate-12 mix-blend-difference'
         ></motion.div>

@@ -1,4 +1,4 @@
-import React,{useState, useEffect , useCallback} from 'react';
+import React,{useState, useEffect} from 'react';
 import Font,{Text} from 'react-font';
 import { RxCross1 } from "react-icons/rx";
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -57,6 +57,7 @@ function SinglePrompts({setShowCard ,setPromptAppear}) {
       }
     }
     fetchData();
+    setOutput('');
 
   },[prompt,loading]);
 
